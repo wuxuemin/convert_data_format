@@ -1,0 +1,35 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>upload dialog</title>
+</head>
+<body>
+
+<input id="dialog" type="file" webkitdirectory />
+<script>
+    dialog.onchange = function(e) {
+        var files = this.files;
+        var table = {};
+
+        for (var i = 0; i < files.length; i++) {
+            var f = files[i];
+            var dt = new Date(f.lastModified);
+
+            table[i] = {
+                path: f.webkitRelativePath,
+                size: f.size,
+                content:f.content,
+                modified: dt.toLocaleString()
+            };
+        }
+
+        console.table(table);
+        document.write(files[0]);
+        document.write(files[1]);
+    };
+</script>
+
+</body>
+</html>
