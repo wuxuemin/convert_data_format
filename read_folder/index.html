@@ -1,0 +1,53 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>upload dialog</title>
+    <script src="js/DataGridRenderer.js"></script>
+    <script src="js/a.js"></script>
+</head>
+<body>
+
+<input id="dialog" type="file" webkitdirectory />
+<script>
+    var string_array= new Array();
+    dialog.onchange = function(e) {
+        var files = this.files;
+        var table = {};
+        var string_str="";
+        for (var i = 0; i < files.length; i++) {
+            var f = files[i];
+            var dt = new Date(f.lastModified);
+
+             var reader = new FileReader();
+                //将文件以文本形式读入页面
+                reader.readAsText(files[i]);
+                reader.onload=function(f){
+                    //console.log(this.result);
+                    //string_str=this.result;
+                    string_array[i]="";
+                    string_array[i]=this.result;
+                    sss(string_array[i]);
+                    //console.log(string_str);
+                }
+                //console.log(string_str);
+
+            table[i] = {
+                path: f.webkitRelativePath,
+                size: f.size,
+                name:f.name,
+                modified: dt.toLocaleString()
+            };
+        }
+
+        console.table(table);
+
+        //document.write(files[0]);
+        //document.write(files[1]);
+    };
+    
+</script>
+<button onclick="a()">见证奇迹</button>
+</body>
+</html>
